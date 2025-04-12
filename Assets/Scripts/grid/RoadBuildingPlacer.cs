@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridBuildingPlacer: MonoBehaviour
+public class RoadBuildingPlacer: MonoBehaviour
 {
     public GameObject roadPrefab;
     public GameObject nodePrefab;
