@@ -16,6 +16,18 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         grid = new GridCell[Screen.width, Screen.height]; // Default is false
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                grid[x, y] = new GridCell();
+                grid[x, y].isRoad = false;
+                grid[x, y].road = null;
+                grid[x, y].node = null;
+            }
+        }
+
         CreateGridVisualization();
     }
 
@@ -63,7 +75,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void FillGrid(int x, int y, GameObject road, GameObject node)
+    public void FillGrid(int x, int y, GameObject node)
     {
         // Check if the position is within grid bounds
         if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
@@ -72,7 +84,7 @@ public class GridManager : MonoBehaviour
         }
         
         grid[x, y].isRoad = true;
-        grid[x, y].road = road;
+        grid[x, y].road = null;
         grid[x, y].node = node;
     }
 
@@ -107,7 +119,6 @@ public class GridManager : MonoBehaviour
     
     public bool IsCellFree(int x, int y)
     {
-        Debug.Log($"Checking cell at ({x}, {y}): {grid[x, y].isRoad}");
         // Check if the position is within grid bounds
         if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
         {

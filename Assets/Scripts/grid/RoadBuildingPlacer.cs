@@ -45,20 +45,9 @@ public class RoadBuildingPlacer: MonoBehaviour
         previewObject.transform.position = snappedPosition;
 
         // Check if position is valid for placement
-        if (gridManager == null)
-        {
-            Debug.LogError("GridManager not found in scene!");
-        }
         Vector2Int gridPos = gridManager.WorldToGridPosition(snappedPosition);
-        if (gridManager == null)
-        {
-            Debug.LogError("GridManager not found in scene!");
-        }
         canPlace = gridManager.IsCellFree(gridPos.x, gridPos.y);
-        if (gridManager == null)
-        {
-            Debug.LogError("GridManager not found in scene!");
-        }
+        Debug.Log($"Can place: {canPlace} at {gridPos.x}, {gridPos.y}");
 
         // Update preview color
         Color previewColor = Color.white;
@@ -76,7 +65,7 @@ public class RoadBuildingPlacer: MonoBehaviour
         Vector2Int gridPos = gridManager.WorldToGridPosition(position);
 
         // Create the road
-        GameObject newRoad = Instantiate(roadPrefab, position, Quaternion.identity);
+        // GameObject newRoad = Instantiate(roadPrefab, position, Quaternion.identity);
         GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
         Node nodeComponent = newNode.GetComponent<Node>();
 
@@ -105,6 +94,7 @@ public class RoadBuildingPlacer: MonoBehaviour
                 neighborComponent.ConnectNode(nodeComponent);
             }
         }
-        gridManager.FillGrid(gridPos.x, gridPos.y, newRoad, newNode);
+
+        gridManager.FillGrid(gridPos.x, gridPos.y, newNode);
     }
 }

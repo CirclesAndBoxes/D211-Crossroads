@@ -201,7 +201,6 @@ MonoBehaviour:
   cellSize: 1
   gridWidth: 20
   gridHeight: 20
-  gridColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.2}
 --- !u!1 &1262930558
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1995960234}
-  - component: {fileID: 1995960233}
+  - component: {fileID: 1995960235}
   m_Layer: 0
   m_Name: GridBuildingPlacer
   m_TagString: Untagged
@@ -356,22 +355,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1995960233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995960232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87c60dac9d327f74e8ffe5bdbe77e853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 5885334547209426998, guid: 0a5fcb530e6363849b0be2236742550b, type: 3}
-  buildingColor: {r: 0, g: 1, b: 0.30458236, a: 1}
-  buildingType: 1
-  gridManager: {fileID: 834913559}
 --- !u!4 &1995960234
 Transform:
   m_ObjectHideFlags: 0
@@ -387,6 +370,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1995960235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995960232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ff0c1d7f49deb41b53e26289f88783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadPrefab: {fileID: 5487992279730554189, guid: 66da32bf3c14047e0bba7effa1a857c1, type: 3}
+  nodePrefab: {fileID: 83490273338236145, guid: 645383ad361d547eb80c8228da69e9fb, type: 3}
+  roadColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  gridManager: {fileID: 834913559}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
