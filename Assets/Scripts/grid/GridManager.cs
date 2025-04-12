@@ -9,12 +9,13 @@ public class GridManager : MonoBehaviour
     public int gridHeight = 20;
 
     // Optional 2D array to store grid cell data
-    private bool[,] occupiedCells;
+    private GridCell[,] grid;
+    private GameObject gridVisualization;
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = new bool[Screen.width, Screen.height]; // Default is false
+        grid = new GridCell[Screen.width, Screen.height]; // Default is false
         CreateGridVisualization();
     }
 
@@ -23,7 +24,7 @@ public class GridManager : MonoBehaviour
         gridVisualization = new GameObject("GridVisualization");
 
         Material lineMaterial = new Material(Shader.Find("Sprites/Default"));
-        lineMaterial.color = gridColor;
+        // lineMaterial.color = gridColor;
 
         for (int y = 0; y <= gridHeight; y++)
         {
@@ -42,6 +43,7 @@ public class GridManager : MonoBehaviour
             lineRenderer.SetPosition(0, startPos);
             lineRenderer.SetPosition(1, endPos);
         }
+
         for (int x = 0; x <= gridWidth; x++)
         {
             GameObject line = new GameObject("VLine_" + x);
@@ -59,6 +61,19 @@ public class GridManager : MonoBehaviour
             lineRenderer.SetPosition(0, startPos);
             lineRenderer.SetPosition(1, endPos);
         }
+    }
+
+    public void FillGrid(int x, int y, GameObject road, GameObject node)
+    {
+        // Check if the position is within grid bounds
+        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
+        {
+            return;
+        }
+        
+        grid[x, y].isRoad = true;
+        grid[x, y].road = road;
+        grid[x, y].node = node;
     }
 
     public Vector3 GridToWorldPosition(int x, int y)
@@ -89,15 +104,6 @@ public class GridManager : MonoBehaviour
         Vector2Int gridPos = WorldToGridPosition(worldPosition);
         return GridToWorldPosition(gridPos.x, gridPos.y);
     }
-
-    public void OccupyCell(int x, int y, GameObject occupier = null)
-    {
-        if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight)
-        {
-            grid[x, y].isOccupied = true;
-            grid[x, y].occupyingObject = occupier;
-        }
-    }
     
     public bool IsCellFree(int x, int y)
     {
@@ -107,6 +113,17 @@ public class GridManager : MonoBehaviour
             return false;
         }
         
-        return grid[x, y];
+        return !grid[x, y].isRoad;
+    }
+
+    public GameObject GetNodeAt(int x, int y)
+    {
+        // Check if the position is within grid bounds
+        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
+        {
+            return null;
+        }
+        
+        return grid[x, y].node;
     }
 }

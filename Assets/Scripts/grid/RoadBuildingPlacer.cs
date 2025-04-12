@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class GridBuildingPlacer: MonoBehaviour
 {
-    public GameObject buildingPrefab;
-    public Color buildingColor = Color.red;
-    public BuildingType buildingType = BuildingType.Road;
-
+    public GameObject roadPrefab;
+    public Color roadColor = Color.gray;
     public GridManager gridManager;
 
     private GameObject previewObject;
@@ -16,8 +14,8 @@ public class GridBuildingPlacer: MonoBehaviour
     
     void Start()
     {
-        previewObject = Instantiate(buildingPrefab, Vector3.zero, Quaternion.identity);
-        previewObject.name = "BuildingPreview";
+        previewObject = Instantiate(roadPrefab, Vector3.zero, Quaternion.identity);
+        previewObject.name = "RoadPreview";
 
         // Disable any non-visual components
         foreach (var component in previewObject.GetComponents<Component>())
@@ -57,25 +55,42 @@ public class GridBuildingPlacer: MonoBehaviour
         float time = Time.time;
         if (Input.GetMouseButton(0) && canPlace)
         {
-            CreateBuilding(snappedPosition);
-            
-            // Mark the grid cell as occupied
-            gridManager.OccupyCell(gridPos.x, gridPos.y);
+            CreateRoad(snappedPosition);
         }
     }
 
-    void CreateBuilding(Vector3 position)
+    void CreateRoad(Vector3 position, Vector2Int gridPos)
     {
-        // Create the building
-        GameObject newBuilding = Instantiate(buildingPrefab, position, Quaternion.identity);
-        
-        // Get the Building component
-        Building building = newBuilding.GetComponent<Building>();
-        
-        // Initialize it
-        if (building != null)
+        // Create the road
+        GameObject newRoad = Instantiate(roadPrefab, position, Quaternion.identity);
+        GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
+        Node nodeComponent = newNode.GetComponent<Node>();
+
+
+        Vector2Int[] directions = new Vector2Int[]
         {
-            building.Initialize(buildingType, buildingColor);
+            new Vector2Int(0, 1),   // North
+            new Vector2Int(1, 1),   // North-East
+            new Vector2Int(1, 0),   // East
+            new Vector2Int(1, -1),  // South-East
+            new Vector2Int(0, -1),  // South
+            new Vector2Int(-1, -1), // South-West
+            new Vector2Int(-1, 0),  // West
+            new Vector2Int(-1, 1)   // North-West
+        };
+
+        foreach (Vector2Int dir in directions)
+        {
+            Vector2Int neighborPos = gridPos + dir;
+
+            if (!gridManager.IsCellFree(neighborPos.x, neighborPos.y))
+            {
+                // SO if node and road at this point
+                GameObject neighborNode = gridManager.GetNodeAt(neighborPos.x, neighborPos.y);
+                Node neighborComponent = neighborNode.GetComponent<Node>();
+                neighborComponent.ConnectNode(nodeComponent);
+            }
         }
+        gridManager.FillGrid(gridPos.x, gridPos.y, newRoad, newNode);
     }
 }

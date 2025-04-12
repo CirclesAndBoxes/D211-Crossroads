@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridCell
 {
-    public bool isOccupied;
-    public GameObject occupyingObject;
-    public Vector3 worldPosition;
+    public bool isRoad;
+    public GameObject road;
+    public GameObject node;
 }
