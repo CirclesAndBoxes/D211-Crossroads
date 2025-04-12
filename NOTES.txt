@@ -1,0 +1,6 @@
+* Corresponding colors to numbers;
+0 = Black
+1 = Blue
+2 = Red
+3 = Yellow
+4 = Green

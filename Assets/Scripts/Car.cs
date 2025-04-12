@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    public int groupColor = 0;
+    public int colorIndex = 0;
 
     public float speed;
 
@@ -20,5 +20,21 @@ public class Car : MonoBehaviour
         Vector2 position = transform.position;
         position.x += 0.1f * Time.deltaTime * speed;
         transform.position = position;
+    }
+
+    // Ran when a car is on a node, decides the node it travels to
+    public Node DecideDirection(Node currentNode) {
+        List<Node> nodeList = currentNode.connectedNodes;
+
+        float minimum = currentNode.colorDistances[colorIndex];
+        int minimumIndex = -1;
+        for (int i = 0; i < nodeList.Capacity; i++) {
+            if (minimum > nodeList[i].colorDistances[colorIndex]) {
+                minimumIndex = i;
+                minimum = nodeList[i].colorDistances[colorIndex];
+            }
+        }
+
+        return nodeList[minimumIndex];
     }
 }

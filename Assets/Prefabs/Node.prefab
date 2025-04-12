@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5103940236907519010}
   m_Layer: 0
   m_Name: Node
-  m_TagString: Untagged
+  m_TagString: Node
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4407cf4a076bd4bedb9dbee977a6d573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorDistances: []
+  nodePrefab: {fileID: 5103940236907519010}
+  roadPrefab: {fileID: 1470976311541861827, guid: 66da32bf3c14047e0bba7effa1a857c1, type: 3}
