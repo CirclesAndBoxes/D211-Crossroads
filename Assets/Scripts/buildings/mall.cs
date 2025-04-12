@@ -21,7 +21,8 @@ public class Mall : MonoBehaviour
             entryPoint = transform;
         
         // Set the node that a Mall is connected to as 0
-        
+        entrance.distanceSet[colorIndex] = true;
+        entrance.colorDistances[colorIndex] = 0;
 
         // Start with some needs
         resourcesNeeded = 1;
