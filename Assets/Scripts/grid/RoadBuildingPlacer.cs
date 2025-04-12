@@ -45,15 +45,26 @@ public class RoadBuildingPlacer: MonoBehaviour
         previewObject.transform.position = snappedPosition;
 
         // Check if position is valid for placement
+        if (gridManager == null)
+        {
+            Debug.LogError("GridManager not found in scene!");
+        }
         Vector2Int gridPos = gridManager.WorldToGridPosition(snappedPosition);
+        if (gridManager == null)
+        {
+            Debug.LogError("GridManager not found in scene!");
+        }
         canPlace = gridManager.IsCellFree(gridPos.x, gridPos.y);
+        if (gridManager == null)
+        {
+            Debug.LogError("GridManager not found in scene!");
+        }
 
         // Update preview color
         Color previewColor = Color.white;
         previewColor.a = canPlace ? 0.7f : 0.3f;
         previewRenderer.color = previewColor;
         
-        float time = Time.time;
         if (Input.GetMouseButton(0) && canPlace)
         {
             CreateRoad(snappedPosition);

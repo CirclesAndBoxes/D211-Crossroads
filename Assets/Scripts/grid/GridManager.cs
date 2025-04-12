@@ -107,12 +107,12 @@ public class GridManager : MonoBehaviour
     
     public bool IsCellFree(int x, int y)
     {
+        Debug.Log($"Checking cell at ({x}, {y}): {grid[x, y].isRoad}");
         // Check if the position is within grid bounds
         if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
         {
             return false;
         }
-        
         return !grid[x, y].isRoad;
     }
 
