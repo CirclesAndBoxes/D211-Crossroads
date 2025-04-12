@@ -7,28 +7,14 @@ public class GridManager : MonoBehaviour
     public float cellSize = 1f;
     public int gridWidth = 20;
     public int gridHeight = 20;
-    public Color gridColor = new Color(0.5f, 0.5f, 0.5f, 0.2f);
-    
-    // Visual grid lines
-    private GameObject gridVisualization;
+
     // Optional 2D array to store grid cell data
-    private GridCell[,] grid;
+    private bool[,] occupiedCells;
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = new GridCell[Screen.width, Screen.height];
-
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                grid[x, y] = new GridCell();
-                grid[x, y].isOccupied = false;
-                grid[x, y].worldPosition = GridToWorldPosition(x, y);
-            }
-        }
-
+        grid = new bool[Screen.width, Screen.height]; // Default is false
         CreateGridVisualization();
     }
 
@@ -121,6 +107,6 @@ public class GridManager : MonoBehaviour
             return false;
         }
         
-        return !grid[x, y].isOccupied;
+        return grid[x, y];
     }
 }

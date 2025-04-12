@@ -6,7 +6,7 @@ public class GridBuildingPlacer: MonoBehaviour
 {
     public GameObject buildingPrefab;
     public Color buildingColor = Color.red;
-    public BuildingType buildingType = BuildingType.CarGenerator;
+    public BuildingType buildingType = BuildingType.Road;
 
     public GridManager gridManager;
 

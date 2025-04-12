@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 5885334547209426998, guid: 0a5fcb530e6363849b0be2236742550b, type: 3}
-  buildingColor: {r: 1, g: 0, b: 0, a: 1}
+  buildingColor: {r: 0, g: 1, b: 0.30458236, a: 1}
   buildingType: 1
   gridManager: {fileID: 834913559}
 --- !u!4 &1995960234
