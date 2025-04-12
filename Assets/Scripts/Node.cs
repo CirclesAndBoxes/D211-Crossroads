@@ -16,13 +16,7 @@ public class Node : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UpdateDistances();
     }
 
     // Sets own distance based on distance of nearby
@@ -32,7 +26,9 @@ public class Node : MonoBehaviour
         float[] originalDistances = (float[]) colorDistances.Clone();
 
         for (int i = 0; i < colorDistances.Length; i++) {
-            colorDistances[i] = connectedNodes[i].colorDistances.Min() + 1;
+            if (!distanceSet[i]){
+                colorDistances[i] = connectedNodes[i].colorDistances.Min() + 1;
+            }
         }
         return !colorDistances.Equals(originalDistances);
     }
