@@ -11,6 +11,10 @@ public class Factory : MonoBehaviour
     
     // Production timer
     private float productionTimer = 0f;
+
+    public Node entrance;
+
+    public GameObject carPrefab;
     
     void Start()
     {
@@ -33,12 +37,13 @@ public class Factory : MonoBehaviour
             resourceCount++;
             productionTimer = 0f;
             
+            SpawnCar();
             Debug.Log($"Factory produced a resource. Resources: {resourceCount}/{maxResources}");
         }
     }
     
     // Spawn a car from this factory
-    public GameObject SpawnCar(GameObject carPrefab)
+    public GameObject SpawnCar()
     {
         if (carPrefab == null || spawnPoint == null)
             return null;
@@ -56,6 +61,7 @@ public class Factory : MonoBehaviour
         {
             carComponent.colorIndex = this.colorIndex;
             carComponent.speed = 5f; // Default speed
+            carComponent.fromNode = entrance;
         }
         
         // Reduce the resource count

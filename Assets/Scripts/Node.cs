@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public float[] colorDistances = {1000000, 1000000, 1000000, 1000000, 1000000};
+    public float[] colorDistances = {1000000.0f, 1000000.0f, 1000000.0f, 1000000.0f, 1000000.0f};
     public List<Node> connectedNodes;
     public Node nodePrefab;
     public Road roadPrefab;
@@ -16,6 +16,8 @@ public class Node : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //colorDistances = new float[]{1000000.0f, 1000000.0f, 1000000.0f, 1000000.0f, 1000000.0f};
+        Debug.Log(colorDistances);
         UpdateDistances();
     }
 

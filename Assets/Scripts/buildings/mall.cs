@@ -8,7 +8,7 @@ public class Mall : MonoBehaviour
     public float consumptionInterval = 8f; // Time in seconds between consuming resources
     public int resourcesNeeded = 0;
     public int maxResourcesNeeded = 3;
-    public Node entrance;
+    public Node entrance = new Node();
     public int colorIndex;
 
     // Consumption timer
@@ -22,7 +22,10 @@ public class Mall : MonoBehaviour
         
         // Set the node that a Mall is connected to as 0
         entrance.distanceSet[colorIndex] = true;
-        entrance.colorDistances[colorIndex] = 0;
+        Debug.Log(colorIndex);
+        Debug.Log(entrance.colorDistances.Length);
+
+        entrance.colorDistances[colorIndex] = 0.0f;
 
         // Start with some needs
         resourcesNeeded = 1;
