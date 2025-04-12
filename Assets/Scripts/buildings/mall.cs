@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Mall : MonoBehaviour
@@ -7,7 +8,9 @@ public class Mall : MonoBehaviour
     public float consumptionInterval = 8f; // Time in seconds between consuming resources
     public int resourcesNeeded = 0;
     public int maxResourcesNeeded = 3;
-    
+    public Node entrance;
+    public int colorIndex;
+
     // Consumption timer
     private float consumptionTimer = 0f;
     
@@ -16,7 +19,10 @@ public class Mall : MonoBehaviour
         // If no entry point is defined, use the transform position
         if (entryPoint == null)
             entryPoint = transform;
-            
+        
+        // Set the node that a Mall is connected to as 0
+        
+
         // Start with some needs
         resourcesNeeded = 1;
     }

@@ -11,6 +11,8 @@ public class Node : MonoBehaviour
     public Node nodePrefab;
     public Road roadPrefab;
 
+    public bool[] distanceSet = {false, false, false, false, false};
+
     // Start is called before the first frame update
     void Start()
     {
