@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridBuildingPlacer: MonoBehaviour
 {
     public GameObject roadPrefab;
+    public GameObject nodePrefab;
     public Color roadColor = Color.gray;
     public GridManager gridManager;
 
@@ -29,7 +30,7 @@ public class GridBuildingPlacer: MonoBehaviour
         previewRenderer = previewObject.GetComponent<SpriteRenderer>();
         
         // Make it semi-transparent
-        Color previewColor = buildingColor;
+        Color previewColor = Color.white;
         previewColor.a = 0.5f;
         previewRenderer.color = previewColor;
     }
@@ -48,7 +49,7 @@ public class GridBuildingPlacer: MonoBehaviour
         canPlace = gridManager.IsCellFree(gridPos.x, gridPos.y);
 
         // Update preview color
-        Color previewColor = buildingColor;
+        Color previewColor = Color.white;
         previewColor.a = canPlace ? 0.7f : 0.3f;
         previewRenderer.color = previewColor;
         
@@ -59,8 +60,10 @@ public class GridBuildingPlacer: MonoBehaviour
         }
     }
 
-    void CreateRoad(Vector3 position, Vector2Int gridPos)
+    void CreateRoad(Vector3 position)
     {
+        Vector2Int gridPos = gridManager.WorldToGridPosition(position);
+
         // Create the road
         GameObject newRoad = Instantiate(roadPrefab, position, Quaternion.identity);
         GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
