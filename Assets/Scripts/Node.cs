@@ -23,13 +23,26 @@ public class Node : MonoBehaviour
         
     }
 
-    public void UpdateDistances()
+    // Sets own distance based on distance of nearby
+    // return: Whether any of the distances were updated
+    public bool UpdateDistances()
     {
+        float[] originalDistances = (float[]) colorDistances.Clone();
+
         for (int i = 0; i < colorDistances.Length; i++) {
             colorDistances[i] = connectedNodes[i].colorDistances.Min() + 1;
         }
+        return !colorDistances.Equals(originalDistances);
     }
 
+    // Updates self and others if self updates
+    public void RecursiveUpdate(int updatesLeft = 500) {
+        if(UpdateDistances() && updatesLeft > 0) {
+            foreach (Node n in connectedNodes) {
+                n.RecursiveUpdate(updatesLeft - 1);
+            }
+        }
+    }
 
     // Creates a new node and connects them
     public void NewNode() {
@@ -55,6 +68,9 @@ public class Node : MonoBehaviour
             Road road = Instantiate(roadPrefab, new Vector2(1, 2), Quaternion.identity);
             road.startNode = this;
             road.endNode = other;
+
+            // update distances 
+            RecursiveUpdate();
         }
     }
 }
