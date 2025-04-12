@@ -29,7 +29,7 @@ public class Node : MonoBehaviour
 
         for (int i = 0; i < colorDistances.Length; i++) {
             if (!distanceSet[i]){
-                colorDistances[i] = connectedNodes[i].colorDistances.Min() + 1;
+                colorDistances[i] = connectedNodes.Min(node => node.colorDistances[i]) + 1;
             }
         }
         return !colorDistances.Equals(originalDistances);
